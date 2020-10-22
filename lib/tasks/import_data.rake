@@ -28,7 +28,7 @@ namespace :import_data do
               affiliations << Affiliation.where(name: affiliation.capitalize).first_or_create
             end
             p affiliations
-            person = Person.create(name: row["Name"], species: row["Species"], gender: row["Gender"], vehicle: vehicle, weapon: weapon, locations: locations, affiliations: affiliations)
+            person = Person.create(name: row["Name"], first_name: first_name.capitalize, last_name: last_name.capitalize, species: row["Species"], gender: row["Gender"], vehicle: vehicle, weapon: weapon, locations: locations, affiliations: affiliations)
             p person
         end
       end
