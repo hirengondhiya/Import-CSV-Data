@@ -1,5 +1,9 @@
 require 'csv'
 namespace :import_data do
+  def to_title_case str_input
+    str_input.humanize.gsub(/\b('?[a-z])/) { $1.capitalize }
+  end
+    
   desc "Import Person data from CSV"
   task people: :environment do
     filename = File.join Rails.root, "SentiaCodingTestData.csv"
@@ -28,7 +32,7 @@ namespace :import_data do
               affiliations << Affiliation.where(name: affiliation.capitalize).first_or_create
             end
             p affiliations
-            person = Person.create(name: row["Name"], first_name: first_name.capitalize, last_name: last_name.capitalize, species: row["Species"], gender: row["Gender"], vehicle: vehicle, weapon: weapon, locations: locations, affiliations: affiliations)
+            person = Person.create(name: to_title_case(row["Name"]), first_name: first_name.capitalize, last_name: last_name.capitalize, species: row["Species"], gender: row["Gender"], vehicle: vehicle, weapon: weapon, locations: locations, affiliations: affiliations)
             p person
         end
       end
