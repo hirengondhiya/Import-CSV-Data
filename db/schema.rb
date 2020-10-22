@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_22_005832) do
+ActiveRecord::Schema.define(version: 2020_10_22_021615) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,10 @@ ActiveRecord::Schema.define(version: 2020_10_22_005832) do
     t.string "gender"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "vehicle_id"
+    t.bigint "weapon_id"
+    t.index ["vehicle_id"], name: "index_people_on_vehicle_id"
+    t.index ["weapon_id"], name: "index_people_on_weapon_id"
   end
 
   create_table "vehicles", force: :cascade do |t|
@@ -57,4 +61,6 @@ ActiveRecord::Schema.define(version: 2020_10_22_005832) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "people", "vehicles"
+  add_foreign_key "people", "weapons"
 end
