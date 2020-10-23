@@ -50,3 +50,22 @@ f. Names and Locations should all be titlecased
   ```
   rails s
   ```
+
+## Sample Data
+[Sample data for test](./TestData.csv)
+
+## Screen Prints
+1. Initial Screen
+   ![screen1](./docs/images/1.png)
+2. Data file selected
+   ![screen2](./docs/images/2.png)
+3. Data file uploaded
+   ![screen3](./docs/images/3.png)
+4. Show uploaded data in Grid with pagin at bottom
+   ![screen4](./docs/images/4.png)
+5. Sort data in grid based on column
+   ![screen5](./docs/images/5.png)
+6. Filter data in grid based on a column
+   ![screen6](./docs/images/6.png)
+7. Filter data in grid based on multiple columns
+   ![screen7](./docs/images/7.png)
