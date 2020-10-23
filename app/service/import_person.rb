@@ -9,20 +9,20 @@ class ImportPerson
 
   def vehicle_from_row
       if @row[:vehicle]
-        vehicle = Vehicle.where(name: @row[:vehicle].capitalize).first_or_create
+        vehicle = Vehicle.where(name: to_title_case(@row[:vehicle])).first_or_create
       end            
   end
 
   def weapon_from_row
       if @row[:weapon]
-        weapon = Weapon.where(name: @row[:weapon].capitalize).first_or_create
+        weapon = Weapon.where(name: to_title_case(@row[:weapon])).first_or_create
       end
   end
 
   def locations_from_row
       locations = []
       @row[:location].split(',').each do |location|
-        locations << Location.where(name: location.capitalize).first_or_create
+        locations << Location.where(name: to_title_case(location)).first_or_create
       end
       locations
   end
@@ -31,7 +31,7 @@ class ImportPerson
       affiliations = []
       if @row[:affiliations]
         @row[:affiliations].split(',').each do |affiliation| 
-          affiliations << Affiliation.where(name: affiliation.capitalize).first_or_create
+          affiliations << Affiliation.where(name: to_title_case(affiliation)).first_or_create
         end
       end
       affiliations
