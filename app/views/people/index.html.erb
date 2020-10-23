@@ -1,5 +1,22 @@
 <h1>People Data</h1>
 
+<%= grid(@people_grid) do |g|
+  g.column name: 'ID', attribute: 'id'
+  g.column name: 'Name', attribute: 'name'
+  g.column name: 'First Name', attribute: 'first_name'
+  g.column name: 'Last Name', attribute: 'last_name'
+  g.column name: 'Locations', attribute: 'name', assoc: :locations do |person|
+    person.locations.map(&:name).join(', ') if person.locations
+  end
+  g.column name: 'Species', attribute: 'species'
+  g.column name: 'Gender', attribute: 'gender'
+  g.column name: 'Affiliations', attribute: 'name', assoc: :affiliations do |person|
+    person.affiliations.map(&:name).join(', ') if person.affiliations
+  end
+  g.column name: 'Weapon', attribute: 'name', assoc: :weapon
+  g.column name: 'Vehicle', attribute: 'name', assoc: :vehicle
+end -%>
+
 <%= form_for @import, url: import_people_path, multipart: true do |f| %>
   <% if @import.errors.any? %>
     <ul>
