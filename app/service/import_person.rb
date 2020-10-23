@@ -3,6 +3,10 @@ class ImportPerson
     @row = row
   end
 
+  def to_title_case str_input
+    str_input.humanize.gsub(/\b('?[a-z])/) { $1.capitalize }
+  end
+
   def vehicle_from_row
       if @row[:vehicle]
         vehicle = Vehicle.where(name: @row[:vehicle].capitalize).first_or_create
