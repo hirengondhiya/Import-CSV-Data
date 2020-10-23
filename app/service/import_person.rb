@@ -37,6 +37,16 @@ class ImportPerson
       affiliations
   end
 
+  def gender_from_row
+    first_char = @row[:gender][0].upcase
+    if first_char == "M"
+      return "Male"
+    elsif first_char == "F"
+      return "Female"
+    end
+    @row[:gender].capitalize
+  end
+
   def execute
       name = to_title_case to_title_case(@row[:name])
       name_values = name.split(' ')
@@ -46,7 +56,7 @@ class ImportPerson
          first_name: first_name, 
           last_name: name_values.length > 1 ? last_name : "", 
           species: @row[:species], 
-          gender: @row[:gender], 
+          gender: gender_from_row, 
           vehicle: vehicle_from_row, 
           weapon: weapon_from_row, 
           locations: locations_from_row, 
