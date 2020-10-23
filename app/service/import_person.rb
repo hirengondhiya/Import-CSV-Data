@@ -42,9 +42,8 @@ class ImportPerson
       name_values = name.split(' ')
       first_name, last_name =  name_values.values_at(0, -1)
 
-      person = Person.create(
-          name: name,
-          first_name: first_name, 
+      person = Person.where(name: name).first_or_create(
+         first_name: first_name, 
           last_name: name_values.length > 1 ? last_name : "", 
           species: @row[:species], 
           gender: @row[:gender], 
