@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_22_055449) do
+ActiveRecord::Schema.define(version: 2020_10_23_001307) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,13 +42,27 @@ ActiveRecord::Schema.define(version: 2020_10_22_055449) do
     t.string "gender"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "vehicle_id"
-    t.bigint "weapon_id"
     t.string "first_name"
     t.string "last_name"
     t.string "name"
-    t.index ["vehicle_id"], name: "index_people_on_vehicle_id"
-    t.index ["weapon_id"], name: "index_people_on_weapon_id"
+  end
+
+  create_table "person_weapons", force: :cascade do |t|
+    t.bigint "weapon_id"
+    t.bigint "person_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["person_id"], name: "index_person_weapons_on_person_id"
+    t.index ["weapon_id"], name: "index_person_weapons_on_weapon_id"
+  end
+
+  create_table "vehicle_people", force: :cascade do |t|
+    t.bigint "vehicle_id"
+    t.bigint "person_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["person_id"], name: "index_vehicle_people_on_person_id"
+    t.index ["vehicle_id"], name: "index_vehicle_people_on_vehicle_id"
   end
 
   create_table "vehicles", force: :cascade do |t|
@@ -63,6 +77,8 @@ ActiveRecord::Schema.define(version: 2020_10_22_055449) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "people", "vehicles"
-  add_foreign_key "people", "weapons"
+  add_foreign_key "person_weapons", "people"
+  add_foreign_key "person_weapons", "weapons"
+  add_foreign_key "vehicle_people", "people"
+  add_foreign_key "vehicle_people", "vehicles"
 end
