@@ -1,2 +1,13 @@
-<h1>People#index</h1>
-<p>Find me in app/views/people/index.html.erb</p>
+<h1>People Data</h1>
+
+<%= form_for @import, url: import_people_path, multipart: true do |f| %>
+  <% if @import.errors.any? %>
+    <ul>
+    <% @import.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  <% end %>
+  <%= f.file_field :file %>
+  <%= f.submit "Upload" %>
+<% end %>
